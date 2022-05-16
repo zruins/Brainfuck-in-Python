@@ -37,10 +37,10 @@ def main(arg):
 	
 
 if __name__ == "__main__":
-	output = open("out", "w")
 	print("Python Brainf**k Compiler v1.1.1, say \"quit\" to exit")
 	while True:
 		i = input("$ ")
+		output = open("out", "w")
 		if i != "quit":
 			if i[0] != "*":
 				main(i)
@@ -51,6 +51,6 @@ if __name__ == "__main__":
 				main(f.read())
 				f.close()
 			system("python3 out")
+			system("rm out")
 		else:
 			break
-	system("rm out")
