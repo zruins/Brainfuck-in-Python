@@ -3,14 +3,13 @@ from os import system
 def main(arg):
 	output.write("")
 	write = lambda content: output.writelines(content)
-	inLoop = False
+	loops = 0
 	prompt = arg
-	
 	pointer = 0
 
 	write("outputstr=\"\"\na=[]\nptr=0\niter=0\nwhile iter<64:\n\ta.append(0)\n\titer+=1\n")
 	while pointer < len(prompt):
-		loopCheck = ("\t" if inLoop else "")
+		loopCheck = "\t" * loops
 		if prompt[pointer] == "+":
 			write(loopCheck + "a[ptr]+=1\n")
 		elif prompt[pointer] == "-":
@@ -20,12 +19,10 @@ def main(arg):
 		elif prompt[pointer] == "<":
 			write(loopCheck + "ptr-=1\n")
 		elif prompt[pointer] == "[":
-			if loopCheck:
-				raise SyntaxError("Nested loops are unsupported")
-			write("loopOrigin=ptr\nwhile a[loopOrigin]>0:\n")
-			inLoop = True
+			write(f"loopOrigin{loops}=ptr\nwhile a[loopOrigin{loops}]>0:\n")
+			loops += 1
 		elif prompt[pointer] == "]":
-			inLoop = False
+			loops -= 1
 		elif prompt[pointer] == ".":
 			write(loopCheck + "outputstr+=str(chr(a[ptr]))\n")
 		elif prompt[pointer] == ",":
@@ -37,11 +34,11 @@ def main(arg):
 	
 
 if __name__ == "__main__":
-	print("Python Brainf**k Compiler v1.1.2, say \"quit\" to exit")
+	print("Python Brainf**k Compiler v1.2.2, say \"quit\" to exit")
 	while True:
 		i = input("$ ")
-		output = open("out", "w")
 		if i != "quit":
+			output = open("out", "w")
 			if i[0] != "*":
 				main(i)
 			else:
