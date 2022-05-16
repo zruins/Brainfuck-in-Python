@@ -37,7 +37,7 @@ def main(arg):
 	
 
 if __name__ == "__main__":
-	print("Python Brainf**k Compiler v1.1.1, say \"quit\" to exit")
+	print("Python Brainf**k Compiler v1.1.2, say \"quit\" to exit")
 	while True:
 		i = input("$ ")
 		output = open("out", "w")
